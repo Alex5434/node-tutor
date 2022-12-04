@@ -1,6 +1,16 @@
-const  s = require('lodash')
+const {readFile} = require('fs');
 
-const item = [1,[2,[3,[4]]]]
+const getText = (path)=>{
+  return new Promise((resolve, reject)=>{
+    readFile(path, 'utf8',(err, data)=>{
+      if(err) reject(err);
+      else{
+        resolve(data);
+      }
+    })
+  })
+}
 
-const newt = s.flattenDeep(item)
-console.log(newt);
+getText('./content/subfolder/alex.txt')
+  .then(result=>console.log(result))
+  .catch(err=>console.log(err))
